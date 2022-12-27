@@ -106,4 +106,11 @@ public class BeerServiceImpl implements BeerService {
 
         return beerMapper.beerToBeerDto(beerRepository.save(beer));
     }
+
+    @Cacheable(cacheNames = "beerUpcCache")
+    @Override
+    public BeerDto getByUpc(String upc) {
+        System.out.println("cache getByUpc");
+        return beerMapper.beerToBeerDto(beerRepository.findByUpc(upc));
+    }
 }
